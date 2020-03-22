@@ -2,7 +2,7 @@ require('dotenv').config()
 const async = require('async');
 const fs = require('fs');
 const moment = require('moment')
-moment.locale('id');
+moment.locale('pt-br');
 const {
     Tabletojson: tabletojson
 } = require('tabletojson');
@@ -42,7 +42,7 @@ async.forever(
             function (tablesAsJson) {
                 var jsonData = JSON.parse(JSON.stringify(tablesAsJson).split('"Country,Other":').join('"Country":'));
                 jsonData = JSON.parse(JSON.stringify(jsonData).split('"Serious,Critical":').join('"Critical":'));
-                var search = jsonData[0].filter(x => x.Country === "Indonesia");
+                var search = jsonData[0].filter(x => x.Country === "Brazil");
                 const result = search[0]
                 delete result.Critical
                 delete result['Tot Cases/1M pop']
@@ -54,7 +54,7 @@ async.forever(
                     result.NewCases === '' ? result.NewCases = `+0`: result.NewCases
                     result.NewDeaths === '' ? result.NewDeaths = `+0`: result.NewDeaths
                     if (result.TotalCases !== localData.TotalCases || result.TotalDeaths !== localData.TotalDeaths || result.TotalRecovered !== localData.TotalRecovered) {
-                        result.lastUpdate = `${moment().format('LLLL').replace("pukul","|")} WIB`
+                        result.lastUpdate = `${moment().format('LLLL')}`
                         fs.writeFile('./CoronaService/data.json', JSON.stringify(result), 'utf-8', function (err) {
                             if (err) throw err
                             console.log(`[ ${moment().format('HH:mm:ss')} ] New Update on Data.json`)
