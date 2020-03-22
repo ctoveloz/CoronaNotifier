@@ -211,63 +211,24 @@ client.on('message', async msg => {
             client.sendMessage(msg.from, `The bot has ${chats.length} chats open and ${userData.length} users.`);
         })
 
-    } else if (msg.body == '!info' || msg.body == '!help' || msg.body == '!menu') {
+    } else if (msg.body == '!info' || msg.body == '!ajuda' || msg.body == '!menu') {
         var contact = await await msg.getContact();
-        var nama = contact.pushname !== undefined ? `Hai, ${contact.pushname} 😃` : 'Hai 😃'
+        var nama = contact.pushname !== undefined ? `Oi, ${contact.pushname} 😃` : 'Oi 😃'
         client.sendMessage(msg.from, `
 ${nama}
-kenalin aku Honk! 🤖 robot yang akan memberitahumu informasi mengenai COVID-19 di indonesia.
+ Bot fornecera informações sobre o COVID-19 no Brasil.
 
-*PERINTAH*
-!info/!help  =>  Menu
-!ping  =>  Tes bot
+*COMANDOS*
+!info/!ajuda  =>  Menu
+!ping  =>  Teste bot
 
 *COVID-19* 
-!corona  =>  Informasi COVID-19 Indonesia
-!aktif  =>  Mengaktifkan notifikasi
-!mati  =>  Mematikan notifikasi
+!corona  =>  Informações sobre Covid-19 no Brasil
+!ativar  =>  Ativar notificações
+!desativar  =>  Desativar Notificações
 
-!peta => Peta Sebaran Kasus COVID-19
-!sumber => Sumber data
-
-
-Made with ♥️ by Yoga Sakti`);
-
-    } else if (msg.body == '!sumber') {
-        client.sendMessage(msg.from, `
-Sumber: 
-1. _https://kawalcovid19.id/_
-2. _https://kawalcorona.com/_
-3. _www.worldometers.info/coronavirus/_
-4. _https://covid19.mathdro.id/api/og_`);
-
-    } else if (msg.body == '!peta') {
-        client.sendMessage(msg.from, `
-Daftar Peta Sebaran COVID-19 
-
-DKI Jakarta
-- _https://corona.jakarta.go.id/_
-
-Jawa Barat
-- _https://pikobar.jabarprov.go.id/_
-
-Jawa Tengah
-- _https://corona.jatengprov.go.id/_
-
-Jawa Timur
-- Tidak di-publish
-
-Yogyakarta
-- _http://corona.jogjaprov.go.id/_
-
-Banten
-- _https://infocorona.bantenprov.go.id/_
-
-Riau
-- _https://corona.riau.go.id/_
-
-Jika ada peta provinsi lain tolong beritahukan 🙂
 `);
+
     } else if (msg.body == '!localdata') {
         let localData = client.localData;
         console.log(localData);
@@ -352,10 +313,10 @@ Jika ada peta provinsi lain tolong beritahukan 🙂
         // stops typing or recording in the chat
         chat.clearState();
 
-    } else if (msg.body === '!mati') {
+    } else if (msg.body === '!desativar') {
         let chat = await msg.getChat();
         if (chat.isGroup) {
-            msg.reply('Maaf, perintah ini tidak bisa digunakan di dalam grup! silahkan kirim !aktif di personal chat untuk mengaktifkan notifikasi.');
+            msg.reply('Desculpe, esse comando não pode ser usado em grupos envie no pv para desativar as notificações.');
         } else {
             User.checkUser(msg.from).then(result => {
                 if (result) {
@@ -363,37 +324,37 @@ Jika ada peta provinsi lain tolong beritahukan 🙂
                         .then(result => {
                             if (result) {
                                 client.sendMessage(msg.from,
-                                    'Berhasil menonaktifkan, anda tidak akan mendapat notifikasi lagi.'
+                                    'Desativado com êxito, você não receberá mais notificações.'
                                 );
                             } else {
                                 client.sendMessage(msg.from,
-                                    'Gagal menonaktifkan, nomor tidak terdaftar.'
+                                    'Falha ao desativar, número não registrado.'
                                 );
                             }
                         })
                 } else {
                     client.sendMessage(msg.from,
-                        'Gagal menonaktifkan, nomor tidak terdaftar.'
+                        'Falha ao desativar, número não registrado.'
                     );
                 }
             })
         }
 
 
-    } else if (msg.body === '!aktif' || msg.body === '!daftar') {
+    } else if (msg.body === '!ativar') {
         let chat = await msg.getChat();
         if (chat.isGroup) {
-            msg.reply('Maaf, perintah ini tidak bisa digunakan di dalam grup! silahkan kirim !aktif di personal chat untuk mengaktifkan notifikasi.');
+            msg.reply('Desculpe, esse comando não pode ser usado em grupos envie no pv para ativar as notificações.');
         } else {
             User.addUser(msg.from)
                 .then(result => {
                     if (!result) {
                         client.sendMessage(msg.from,
-                            'Notifikasi sudah aktif.'
+                            'Notificações ativadas.'
                         );
                     } else {
                         client.sendMessage(msg.from,
-                            'Berhasil mengaktifkan notifikasi, anda akan mendapat notifikasi ketika ada permbaruan data.'
+                            'Notificações ativada, você receberá uma notificação quando houver atualização de dados.'
                         );
                     }
                 })
@@ -407,21 +368,21 @@ Jika ada peta provinsi lain tolong beritahukan 🙂
             const newDeaths = localData.NewDeaths === '' ? 0 : localData.NewDeaths;
             const NewRecovered = localData.NewRecovered === '' ? 0 : localData.NewRecovered;
             client.sendMessage(msg.from, `
-                    *COVID-19 Update!!*
+                    *COVID-19 Atualizado!!*
 
-Negara: ${localData.Country}
-Total Kasus: ${localData.TotalCases}
+País: ${localData.Country}
+Casos Totais: ${localData.TotalCases}
 
-Total Kasus aktif: ${localData.ActiveCases}
-*Kasus Baru: ${newCases}*
+Casos Totais Ativos: ${localData.ActiveCases}
+*Novos Casos: ${newCases}*
 
-Total Meninggal: ${localData.TotalDeaths}
-*Meninggal Baru: ${newDeaths}*
+Mortes Totais: ${localData.TotalDeaths}
+*Novas Mortes: ${newDeaths}*
 
-Total Sembuh: ${localData.TotalRecovered}
-*Sembuh Baru: ${NewRecovered}*
+Recuperados Totais: ${localData.TotalRecovered}
+*Novos Recuperados: ${NewRecovered}*
 
-Dicek pada: ${localData.lastUpdate}
+Ultima Atualização: ${localData.lastUpdate}
             `);
             var imageAsBase64 = fs.readFileSync('./CoronaService/corona.png', 'base64');
             var CoronaImage = new MessageMedia("image/png", imageAsBase64);
@@ -544,8 +505,8 @@ listen.on('message', (topic, message) => {
             let number = userData[i].user;
             // number = number.includes('@c.us') ? number : `${number}@c.us`;
             setTimeout(function () {
-                console.log(`[ ${moment().format('HH:mm:ss')} ] Send Corona Update to ${number}`)
-                if (message.toString() === 'New Update!') {
+                console.log(`[ ${moment().format('HH:mm:ss')} ] Enviar Atualização Corona para ${number}`)
+                if (message.toString() === 'Nova atualização!') {
                     fs.readFile('./CoronaService/data.json', 'utf-8', function (err, data) {
                         if (err) throw err
                         const localData = JSON.parse(data)
@@ -553,21 +514,21 @@ listen.on('message', (topic, message) => {
                         const newDeaths = localData.NewDeaths === '' ? 0 : localData.NewDeaths;
                         const NewRecovered = localData.NewRecovered === '' ? 0 : localData.NewRecovered;
                         client.sendMessage(number, `
-                    *COVID-19 Update!!*
-Negara: ${localData.Country}
-Total Kasus: ${localData.TotalCases}
+                    *COVID-19 Atualizado!!*
+País: ${localData.Country}
+Casos Totais: ${localData.TotalCases}
 
-Kasus aktif: ${localData.ActiveCases}
-*Kasus Baru: ${newCases}*
-        
-Meninggal: ${localData.TotalDeaths}
-*Meninggal Baru: ${newDeaths}*
-        
-Sembuh: ${localData.TotalRecovered}
-*Sembuh Baru: ${NewRecovered}*
-                    
-Dicek pada: ${localData.lastUpdate}
-Sumber: 
+Casos Totais Ativos: ${localData.ActiveCases}
+*Novos Casos: ${newCases}*
+
+Mortes Totais: ${localData.TotalDeaths}
+*Novas Mortes: ${newDeaths}*
+
+Recuperados Totais: ${localData.TotalRecovered}
+*Novos Recuperados: ${NewRecovered}*
+
+Ultima Atualização: ${localData.lastUpdate}
+Fonte: 
 _www.worldometers.info/coronavirus/_
                     `);
 

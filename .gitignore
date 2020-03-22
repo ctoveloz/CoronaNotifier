@@ -2,3 +2,5 @@
 node_modules/
 
 session.json
+node
+CoronaService/user.json
