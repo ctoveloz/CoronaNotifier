@@ -1,10 +1,10 @@
-# Corona Notifier 
+# Corona Notifier Brazil 
 ![GitHub last commit](https://img.shields.io/github/last-commit/k1m0ch1/covid-19-api)
 [![npm version](https://img.shields.io/npm/v/sulla-hotfix.svg?color=green)](https://www.npmjs.com/package/sulla-hotfix)
 ![node](https://img.shields.io/node/v/sulla-hotfix)
 ![Twitter](https://img.shields.io/twitter/follow/teman_bahagia?style=social)
 
-Corona Notifier is a Whatsapp automatic notification robot using MQTT & nodeJS. The Corona Service will collect latest data about the COVID-19 indonesian case from the [worldometers](https://www.worldometers.info/coronavirus/)
+Corona Notifier is a Whatsapp automatic notification robot using MQTT & nodeJS. The Corona Service will collect latest data about the COVID-19 Brazil case from the [worldometers](https://www.worldometers.info/coronavirus/)
 
 #### The Diagram
 ![Diagram](Diagram.png)
@@ -51,8 +51,8 @@ The introduction and list of available command, example output
 ```
 COVID-19 
 !corona  =>  ........
-!aktif  =>  .......
-!mati  =>  ......
+!ativar  =>  .......
+!desativar  =>  ......
 ```
 2. !ping 
 Using This command will response "pong"
@@ -60,24 +60,22 @@ Using This command will response "pong"
 Using This command will return information about current indonesia corona case and global case, example output
 ```
          COVID-19 Update!!
-Negara: xx
-Total Kasus: xx
+País: xx
+Casos Totais: xx
 
-Kasus aktif: xx
-Kasus Baru: xx
+Casos Totais Ativos: xx
+Novos Casos: xx
 
-Meninggal: xx
-Meninggal Baru: xx
+Mortes Totais: xx
+Novas Mortes: xx
 
-Sembuh: xx
-Sembuh Baru: xx
+Recuperados Totais: xx
+Novos Recuperados: xx
 
-Dicek pada: xxx, xx xxxx 2020 | xx.xx WIB
+Ultima Atualização: xxx, xx xxxx 2020
 ```
-4. !aktif 
+4. !ativar
 Using This command will enable notifications when there is a data update.
-5. !mati 
+5. !desativar 
 Using This command will disable notifications when there is a data update.
-6. !peta 
-Using This command will return the corona virus distribution map information.
 
