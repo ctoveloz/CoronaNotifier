@@ -1,8 +1,4 @@
 # Corona Notifier Brazil 
-![GitHub last commit](https://img.shields.io/github/last-commit/k1m0ch1/covid-19-api)
-[![npm version](https://img.shields.io/npm/v/sulla-hotfix.svg?color=green)](https://www.npmjs.com/package/sulla-hotfix)
-![node](https://img.shields.io/node/v/sulla-hotfix)
-![Twitter](https://img.shields.io/twitter/follow/teman_bahagia?style=social)
 
 Corona Notifier is a Whatsapp automatic notification robot using MQTT & nodeJS. The Corona Service will collect latest data about the COVID-19 Brazil case from the [worldometers](https://www.worldometers.info/coronavirus/)
 
@@ -43,10 +39,8 @@ run the corona service
 ```
 
 ## Bot Whatsapp Command
-(WARNING: This is only available with Bahasa Language)
-
 This bot is for covid-19 information purpose by automatically answer for available data, by using the available command :
-1. !help 
+1. !ajuda 
 The introduction and list of available command, example output
 ```
 COVID-19 
